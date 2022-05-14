@@ -136,8 +136,8 @@ class Simplifier:
             out = []
             for num in range(1, 10):
                 test_s = f'Y{num}{self.elem_sep}'
-                if (self.type_task == 'in' and test_s in ss) or \
-                        (self.type_task == 'ex' and test_s not in ss):
+                if (self.type_task == 'ex' and test_s in ss) or \
+                        (self.type_task == 'in' and test_s not in ss):
                     out.append(f'x{num}')
             if out:
                 out_s = f'U{index} = {{{", ".join(out)}}}, |U{index}| = ' \
@@ -146,8 +146,8 @@ class Simplifier:
                 index += 1
         self.result_str = '\n'.join(out_arr)
 
-        type_task = "внутренней" if self.type_task == "ex" else "внешней" \
-            if self.type_task == "in" else "НЕВЕРНО УКАЗАН ТИП"
+        type_task = "внутренней" if self.type_task == "in" else "внешней" \
+            if self.type_task == "ex" else "НЕВЕРНО УКАЗАН ТИП"
         self.w_loader.add_section(
             title_of_section=f'--- Полученные множества для задачи '
             f'типа "{type_task} " устойчивости ---', text=self.result_str)
@@ -160,7 +160,7 @@ if __name__ == '__main__':
                         help='Разделитель в скобках')
     parser.add_argument('type_task', type=str, choices=['in', 'ex'],
                         help='Тип решаемой задачи: внутренняя (in) '
-                             'или внешняя устойчивость (ex)')
+                             'или внешняя (ex) устойчивость')
     parser.add_argument('source_str', type=str, help='Исходная строка.')
 
     args = parser.parse_args()
