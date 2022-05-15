@@ -84,8 +84,7 @@ class Simplifier:
         # Первичное упрощение
         out_res = [self.elem_sep.join(sorted(
             list(set(list(filter(
-                lambda x: x, i.split(self.elem_sep
-                                     if self.elem_sep else " ")))))))
+                lambda x: x, re.findall(self.elem_sep_pat, i)))))))
                    + self.elem_sep for i in res]
 
         self.result_str = f' {self.sep} '.join(out_res)
