@@ -82,10 +82,10 @@ class Simplifier:
                             res.append(f'{curr_left_el}{curr_right_el}')
 
         # Первичное упрощение
-        out_res = [self.elem_sep.join(sorted(
+        out_res = [''.join(sorted(
             list(set(list(filter(
                 lambda x: x, re.findall(self.elem_sep_pat, i)))))))
-                   + self.elem_sep for i in res]
+            for i in res]
 
         self.result_str = f' {self.sep} '.join(out_res)
         self.w_loader.add_section(title_of_section='--- Первичное упрощение ('
